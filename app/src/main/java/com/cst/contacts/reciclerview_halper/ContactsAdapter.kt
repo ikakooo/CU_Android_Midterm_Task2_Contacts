@@ -1,7 +1,6 @@
 package com.cst.contacts.reciclerview_halper
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.LightingColorFilter
 import android.graphics.drawable.Drawable
@@ -9,14 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.cst.contacts.R
 import com.cst.contacts.databinding.ContactsLayoutBinding
 import com.cst.contacts.donottouch.ContactInfo
 import com.cst.contacts.donottouch.ContactsApplication
-import com.example.chucknorrisjokes.ui.reciclerview_halper.ItemClickListener
 
 
 class ContactsAdapter(
@@ -76,7 +72,7 @@ class ContactsAdapter(
             itemView.findViewById<TextView>(R.id.TextViewID).text = model.name
 
             itemView.setOnClickListener {
-                clickingListener.viewClicked(adapterPosition)
+                clickingListener.viewClicked(adapterPosition,randomColor)
             }
         }
     }

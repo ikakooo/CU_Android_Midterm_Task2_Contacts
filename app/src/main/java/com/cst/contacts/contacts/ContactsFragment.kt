@@ -18,7 +18,7 @@ import com.cst.contacts.databinding.FragmentContactsBinding
 import com.cst.contacts.donottouch.ContactInfo
 import com.cst.contacts.donottouch.mapToContactInfo
 import com.cst.contacts.reciclerview_halper.ContactsAdapter
-import com.example.chucknorrisjokes.ui.reciclerview_halper.ItemClickListener
+import com.cst.contacts.reciclerview_halper.ItemClickListener
 import com.github.tamir7.contacts.Contacts
 
 class ContactsFragment : Fragment() {
@@ -49,11 +49,12 @@ class ContactsFragment : Fragment() {
         binding.contactsRecyclerViewID.apply {
             contactsAdapter = ContactsAdapter(contactsList,
                 object : ItemClickListener {
-                    override fun viewClicked(position: Int) {
+                    override fun viewClicked(position: Int, randomColor: Int) {
                         val contactID = contactsList[position].id
 
                         val bundle = Bundle()
                         bundle.putLong("Contact_ID",contactID)
+                        bundle.putInt("Contact_Color",randomColor)
                         view?.findNavController()?.navigate(R.id.contactDetailedFragmentID,bundle)
                     }
                 })

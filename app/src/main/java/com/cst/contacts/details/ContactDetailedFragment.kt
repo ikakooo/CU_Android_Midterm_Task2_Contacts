@@ -1,14 +1,20 @@
 package com.cst.contacts.details
 
+import android.graphics.ColorFilter
+import android.graphics.LightingColorFilter
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.cst.contacts.R
 import com.cst.contacts.databinding.FragmentContactsBinding
 import com.cst.contacts.databinding.FragmentDetailedContactBinding
 import com.cst.contacts.donottouch.ContactInfo
+import com.cst.contacts.donottouch.ContactsApplication
 import com.cst.contacts.donottouch.mapToContactInfo
 import com.github.tamir7.contacts.Contact
 import com.github.tamir7.contacts.Contacts
@@ -30,12 +36,19 @@ class ContactDetailedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val bundle = this.arguments
         val contactID = bundle?.getLong("Contact_ID")
+        val contactColor = bundle?.getInt("Contact_Color",1)
         val contactById = contactID?.let { getContactById(it) }
 //        if (contactID != null) {
 ////            d("dgfdgdfgdg", contactID.toLong().toString())
 ////            d("dsfsdfd", getContactById(contactID.toLong()).toString())
 //
 //        }
+        val myIcon: Drawable? = context?.let { ContextCompat.getDrawable(it,R.drawable.circle) }
+        /////////ფერის შეცვლა////////
+        val filter: LightingColorFilter? = contactColor?.let { LightingColorFilter(it, it) }
+        myIcon?.colorFilter = filter
+        //////////////შესაბამისი რანდომ ფერის მქონე რესურსის დასეტვა/////////
+        binding.profilePhotoTextViewID.background = myIcon
         if (contactById != null) {
             binding.profilePhotoTextViewID.text = contactById.name[0].toString()
             binding.contactNameTextViewID.text = contactById.name

@@ -1,5 +1,5 @@
-package com.example.chucknorrisjokes.ui.reciclerview_halper
+package com.cst.contacts.reciclerview_halper
 
 interface ItemClickListener {
-    fun viewClicked(position: Int)
+    fun viewClicked(position: Int,randomColor:Int)
 }

@@ -9,17 +9,21 @@ import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.cst.contacts.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.cst.contacts.databinding.FragmentContactsBinding
 import com.cst.contacts.donottouch.ContactInfo
 import com.cst.contacts.donottouch.mapToContactInfo
+import com.cst.contacts.reciclerview_halper.ContactsAdapter
+import com.example.chucknorrisjokes.ui.reciclerview_halper.ItemClickListener
 import com.github.tamir7.contacts.Contacts
 
 class ContactsFragment : Fragment() {
     private lateinit var binding:FragmentContactsBinding
+
+    private var contactsList = mutableListOf<ContactInfo>()
+    private lateinit var contactsAdapter: ContactsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +43,27 @@ class ContactsFragment : Fragment() {
     private fun displayContacts(contacts: List<ContactInfo>) {
         /** ==== თქვენი კოდი ==== **/
     d("sdfdsfdsf",contacts.toString())
+
+        binding.contactsRecyclerViewID.apply {
+            contactsAdapter = ContactsAdapter(contactsList,
+                object : ItemClickListener {
+                    override fun viewClicked(position: Int) {
+                        val favouritesJoke = contactsList[position]
+                        //აქ იშლება აითემ კლიკზე აითემი
+                        contactsList.removeAt(position)
+                        contactsAdapter.notifyItemRemoved(position)
+                    }
+
+                })
+            layoutManager = LinearLayoutManager(context)
+            adapter = contactsAdapter
+
+        }
+        contactsList.addAll(contacts)
+        d("contactsList",contactsList.toString())
+        contactsAdapter.notifyDataSetChanged()
+
+
         binding.SearchEditTextID.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
             }

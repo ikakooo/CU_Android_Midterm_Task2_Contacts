@@ -18,6 +18,7 @@ class ContactsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupActionBarWithNavController(findNavController(R.id.fragment))
+        supportActionBar?.hide()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -25,6 +26,7 @@ class ContactsActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
 
     private inline fun <T : ViewBinding> AppCompatActivity.viewBinding(
         crossinline bindingInflater: (LayoutInflater) -> T

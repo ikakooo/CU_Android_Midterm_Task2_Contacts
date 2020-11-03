@@ -12,10 +12,11 @@
         tools:layout="@layout/fragment_contacts">
         <action
             android:id="@+id/action_contactsFragment_to_contactDetailedFragment"
-            app:destination="@id/contactDetailedFragment" />
+            app:destination="@id/contactDetailedFragmentID" />
     </fragment>
     <fragment
-        android:id="@+id/contactDetailedFragment"
+        tools:layout="@layout/fragment_detailed_contact"
+        android:id="@+id/contactDetailedFragmentID"
         android:name="com.cst.contacts.details.ContactDetailedFragment"
         android:label="ContactDetailedFragment" />
 </navigation>

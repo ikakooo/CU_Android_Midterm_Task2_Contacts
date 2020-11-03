@@ -11,7 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.cst.contacts.R
 import com.cst.contacts.databinding.FragmentContactsBinding
 import com.cst.contacts.donottouch.ContactInfo
 import com.cst.contacts.donottouch.mapToContactInfo
@@ -43,23 +45,24 @@ class ContactsFragment : Fragment() {
     private fun displayContacts(contacts: List<ContactInfo>) {
         /** ==== თქვენი კოდი ==== **/
     d("sdfdsfdsf",contacts.toString())
-
+        contactsList.clear()
         binding.contactsRecyclerViewID.apply {
             contactsAdapter = ContactsAdapter(contactsList,
                 object : ItemClickListener {
                     override fun viewClicked(position: Int) {
-                        val favouritesJoke = contactsList[position]
-                        //აქ იშლება აითემ კლიკზე აითემი
-                        contactsList.removeAt(position)
-                        contactsAdapter.notifyItemRemoved(position)
-                    }
+                        val contactID = contactsList[position].id
 
+                        val bundle = Bundle()
+                        bundle.putLong("Contact_ID",contactID)
+                        view?.findNavController()?.navigate(R.id.contactDetailedFragmentID,bundle)
+                    }
                 })
             layoutManager = LinearLayoutManager(context)
             adapter = contactsAdapter
 
         }
         contactsList.addAll(contacts)
+
         d("contactsList",contactsList.toString())
         contactsAdapter.notifyDataSetChanged()
 

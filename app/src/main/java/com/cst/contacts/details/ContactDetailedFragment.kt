@@ -1,6 +1,5 @@
 package com.cst.contacts.details
 
-import android.graphics.ColorFilter
 import android.graphics.LightingColorFilter
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -8,20 +7,26 @@ import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.cst.contacts.R
-import com.cst.contacts.databinding.FragmentContactsBinding
 import com.cst.contacts.databinding.FragmentDetailedContactBinding
+import com.cst.contacts.details.reciclerview_halper.ContactsInfoAdapter
 import com.cst.contacts.donottouch.ContactInfo
-import com.cst.contacts.donottouch.ContactsApplication
+import com.cst.contacts.donottouch.Email
+import com.cst.contacts.donottouch.PhoneNumber
 import com.cst.contacts.donottouch.mapToContactInfo
 import com.github.tamir7.contacts.Contact
 import com.github.tamir7.contacts.Contacts
 
 class ContactDetailedFragment : Fragment() {
-    // R.id.contactDetailedFragmentID
+
     private lateinit var binding: FragmentDetailedContactBinding
+    private val phoneNumbersInfoList = mutableListOf<PhoneNumber>()
+    private val emailsInfoList = mutableListOf<Email>()
+    private lateinit var contactsInfoAdapter: ContactsInfoAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,11 +43,11 @@ class ContactDetailedFragment : Fragment() {
         val contactID = bundle?.getLong("Contact_ID")
         val contactColor = bundle?.getInt("Contact_Color",1)
         val contactById = contactID?.let { getContactById(it) }
-//        if (contactID != null) {
-////            d("dgfdgdfgdg", contactID.toLong().toString())
-////            d("dsfsdfd", getContactById(contactID.toLong()).toString())
-//
-//        }
+        if (contactID != null) {
+            d("dgfdgdfgdg", contactID.toLong().toString())
+            d("dsfsdfd", getContactById(contactID.toLong()).toString())
+           // contactById?.emails?.get(0)?.type?.name?.let { d("dsfsdfd", it) }
+        }
         val myIcon: Drawable? = context?.let { ContextCompat.getDrawable(it,R.drawable.circle) }
         /////////ფერის შეცვლა////////
         val filter: LightingColorFilter? = contactColor?.let { LightingColorFilter(it, it) }
@@ -54,6 +59,30 @@ class ContactDetailedFragment : Fragment() {
             binding.contactNameTextViewID.text = contactById.name
         }
 
+        binding.PhoneImageViewID.setOnClickListener {
+         Toast.makeText(context,"Call",Toast.LENGTH_SHORT).show()
+        }
+        binding.MessageImageViewID.setOnClickListener {
+            Toast.makeText(context,"Message",Toast.LENGTH_SHORT).show()
+        }
+        binding.videoImageViewID.setOnClickListener {
+            Toast.makeText(context,"Set Up",Toast.LENGTH_SHORT).show()
+        }
+        binding.EmailImageViewID.setOnClickListener {
+            Toast.makeText(context,"Email",Toast.LENGTH_SHORT).show()
+        }
+
+
+
+        binding.contactInfoRecyclerViewID.apply {
+            contactsInfoAdapter = ContactsInfoAdapter(phoneNumbersInfoList,emailsInfoList)
+            layoutManager = LinearLayoutManager(context)
+            adapter = contactsInfoAdapter
+        }
+
+        contactById?.phoneNumbers?.let { phoneNumbersInfoList.addAll(it) }
+        contactById?.emails?.let { emailsInfoList.addAll(it) }
+        contactsInfoAdapter.notifyDataSetChanged()
     }
 
     /** ==== ქვედა კოდს არ ეხებით, მხოლოდ სწორ ადგილას ახდენთ გამოძახებას ==== **/

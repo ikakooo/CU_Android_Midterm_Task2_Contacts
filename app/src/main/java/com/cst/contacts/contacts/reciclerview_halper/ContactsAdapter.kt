@@ -1,4 +1,4 @@
-package com.cst.contacts.reciclerview_halper
+package com.cst.contacts.contacts.reciclerview_halper
 
 import android.annotation.SuppressLint
 import android.graphics.ColorFilter

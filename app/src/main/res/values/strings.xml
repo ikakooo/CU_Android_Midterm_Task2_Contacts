@@ -5,4 +5,5 @@
     <string name="text">Text</string>
     <string name="email">Email</string>
     <string name="set_up">Set Up</string>
+    <string name="todo">TODO</string>
 </resources>

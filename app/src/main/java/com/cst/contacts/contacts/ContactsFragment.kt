@@ -17,8 +17,8 @@ import com.cst.contacts.R
 import com.cst.contacts.databinding.FragmentContactsBinding
 import com.cst.contacts.donottouch.ContactInfo
 import com.cst.contacts.donottouch.mapToContactInfo
-import com.cst.contacts.reciclerview_halper.ContactsAdapter
-import com.cst.contacts.reciclerview_halper.ItemClickListener
+import com.cst.contacts.contacts.reciclerview_halper.ContactsAdapter
+import com.cst.contacts.contacts.reciclerview_halper.ItemClickListener
 import com.github.tamir7.contacts.Contacts
 
 class ContactsFragment : Fragment() {

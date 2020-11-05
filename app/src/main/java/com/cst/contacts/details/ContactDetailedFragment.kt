@@ -7,14 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cst.contacts.Extensions.changeColorDrawable
 import com.cst.contacts.R
 import com.cst.contacts.databinding.FragmentDetailedContactBinding
 import com.cst.contacts.details.reciclerview_halper.ContactsInfoAdapter
-import com.cst.contacts.donottouch.*
+import com.cst.contacts.donottouch.ContactInfo
+import com.cst.contacts.donottouch.Email
+import com.cst.contacts.donottouch.PhoneNumber
+import com.cst.contacts.donottouch.mapToContactInfo
 import com.github.tamir7.contacts.Contact
 import com.github.tamir7.contacts.Contacts
+
 
 class ContactDetailedFragment : Fragment() {
 
@@ -29,12 +35,25 @@ class ContactDetailedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentDetailedContactBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //////თულბარის გამართვა ///////////////
+        binding.backIBID.setOnClickListener {
+                view.findNavController().navigate(R.id.contactsFragment)
+            }
+        binding.StarIBID.setOnClickListener {
+            Toast.makeText(context, "Favorite", Toast.LENGTH_SHORT).show()
+        }
+        binding.ThreeDotIBID.setOnClickListener {
+            Toast.makeText(context, "ThreeDot", Toast.LENGTH_SHORT).show()
+        }
+
         binding.PhoneImageViewID.isEnabled = false
         binding.MessageImageViewID.isEnabled = false
         binding.videoImageViewID.isEnabled = false
@@ -47,7 +66,7 @@ class ContactDetailedFragment : Fragment() {
         val contactById = contactID?.let { getContactById(it) }
 
         /////////// შესაბამისი ფერის დასეტვა რაც წინა ფრაგმენტის რესაიქლერვიუს ამ კონკრეტულ აითემს ჰქონდა/////////
-        binding.profilePhotoTextViewID.changeColorDrawable(contactColor,R.drawable.circle)
+        binding.profilePhotoTextViewID.changeColorDrawable(contactColor, R.drawable.circle)
 
 
 
@@ -61,13 +80,25 @@ class ContactDetailedFragment : Fragment() {
                 binding.PhoneImageViewID.isEnabled = true
                 binding.MessageImageViewID.isEnabled = true
                 binding.videoImageViewID.isEnabled = true
-                binding.PhoneImageViewID.changeColorDrawable(R.color.purple_200,R.drawable.ic_phone)
-                binding.MessageImageViewID.changeColorDrawable(R.color.purple_200,R.drawable.ic_message)
-                binding.videoImageViewID.changeColorDrawable(R.color.purple_200,R.drawable.ic_video)
+                binding.PhoneImageViewID.changeColorDrawable(
+                    R.color.purple_200,
+                    R.drawable.ic_phone
+                )
+                binding.MessageImageViewID.changeColorDrawable(
+                    R.color.purple_200,
+                    R.drawable.ic_message
+                )
+                binding.videoImageViewID.changeColorDrawable(
+                    R.color.purple_200,
+                    R.drawable.ic_video
+                )
             }
             if (contactById.emails.isNotEmpty()) {
                 binding.EmailImageViewID.isEnabled = true
-                binding.EmailImageViewID.changeColorDrawable(R.color.purple_200,R.drawable.ic_email)
+                binding.EmailImageViewID.changeColorDrawable(
+                    R.color.purple_200,
+                    R.drawable.ic_email
+                )
             }
         }
 

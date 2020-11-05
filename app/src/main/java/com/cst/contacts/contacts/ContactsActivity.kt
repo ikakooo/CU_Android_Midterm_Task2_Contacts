@@ -8,7 +8,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.viewbinding.ViewBinding
 import com.cst.contacts.R
 import com.cst.contacts.databinding.ActivityMainBinding
-import com.cst.contacts.databinding.FragmentContactsBinding
 
 
 class ContactsActivity : AppCompatActivity() {
@@ -18,10 +17,12 @@ class ContactsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupActionBarWithNavController(findNavController(R.id.fragment))
-        supportActionBar?.hide()
+       supportActionBar?.hide()
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
+
 
         val navController = findNavController(R.id.fragment)
         return navController.navigateUp() || super.onSupportNavigateUp()

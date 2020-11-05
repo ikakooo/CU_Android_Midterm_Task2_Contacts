@@ -2,34 +2,35 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-      <LinearLayout
-          android:orientation="vertical"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/Search_EditText_ID"
+    android:layout_height="match_parent">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="40dp"
-        android:autofillHints=""
-        android:background="@drawable/edittext_background"
-        android:hint="@string/search_contacts"
-        android:inputType="text"
-        android:paddingStart="20sp"
-        android:paddingTop="10sp"
-        android:paddingEnd="20sp"
-        android:paddingBottom="10sp"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/Search_EditText_ID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="40dp"
+            android:autofillHints=""
+            android:background="@drawable/edittext_background"
+            android:hint="@string/search_contacts"
+            android:inputType="text"
+            android:paddingStart="20sp"
+            android:paddingTop="10sp"
+            android:paddingEnd="20sp"
+            android:paddingBottom="10sp"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/contactsRecyclerViewID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-      </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/contactsRecyclerViewID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </androidx.core.widget.NestedScrollView>

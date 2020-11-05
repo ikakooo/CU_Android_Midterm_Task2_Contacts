@@ -1,20 +1,15 @@
 package com.cst.contacts.details.reciclerview_halper
 
-import android.annotation.SuppressLint
-import android.graphics.ColorFilter
-import android.graphics.LightingColorFilter
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.cst.contacts.R
-import com.cst.contacts.databinding.ContactsLayoutBinding
 import com.cst.contacts.databinding.DetailedInfoLayoutBinding
-import com.cst.contacts.donottouch.ContactInfo
 import com.cst.contacts.donottouch.ContactsApplication
 import com.cst.contacts.donottouch.Email
 import com.cst.contacts.donottouch.PhoneNumber
@@ -49,8 +44,8 @@ class ContactsInfoAdapter(
         private lateinit var emailModel: Email
 
 
-        @SuppressLint("UseCompatLoadingForDrawables")
         fun onBind() {
+            /////// ადაპტერში ვიუ ბაინდინგი როგორ მუშაობს გასარჩევი მაქვს /////////////
             if (adapterPosition < phoneNumbersInfoList.size) {
                 phoneModel = phoneNumbersInfoList[adapterPosition]
                 itemView.findViewById<TextView>(R.id.InfoTextViewID).text = phoneModel.number
@@ -58,11 +53,18 @@ class ContactsInfoAdapter(
                     phoneModel.type.toString()
 
                 itemView.findViewById<ImageView>(R.id.leftImageViewID).background =
-                    ContactsApplication.instance.getContext().getDrawable(R.drawable.ic_message)
+                    ContextCompat.getDrawable(
+                        ContactsApplication.instance.getContext(),
+                        R.drawable.ic_message
+                    )
+
 
                 when (adapterPosition) {
                     0 -> itemView.findViewById<ImageView>(R.id.RightImageViewID).background =
-                        ContactsApplication.instance.getContext().getDrawable(R.drawable.ic_phone)
+                        ContextCompat.getDrawable(
+                            ContactsApplication.instance.getContext(),
+                            R.drawable.ic_phone
+                        )
                 }
             } else {
                 emailModel = emailsInfoList[adapterPosition - phoneNumbersInfoList.size]
@@ -72,37 +74,13 @@ class ContactsInfoAdapter(
 
                 if (adapterPosition == phoneNumbersInfoList.size) {
                     itemView.findViewById<ImageView>(R.id.RightImageViewID).background =
-                        ContactsApplication.instance.getContext().getDrawable(R.drawable.ic_message)
+                        ContextCompat.getDrawable(
+                            ContactsApplication.instance.getContext(),
+                            R.drawable.ic_message
+                        )
                     itemView.findViewById<ImageView>(R.id.linearLayoutTopID).isVisible = true
                 }
             }
-
-
-            //  binding.numberTextViewID.text = "${model.id +1})"
-            // binding.TextViewID.text = model.name
-
-            //Glide.with(itemView.context).load(BASE_IMG_URL + model.path).into(itemView.moviesImageViewID)
-//            val nameFirsCharTextViewID = itemView.findViewById<TextView>(R.id.nameFirsCharTextViewID)
-//           val  profilePhotoTextViewID = itemView.findViewById<TextView>(R.id.profilePhotoTextViewID)
-//            when {
-//                adapterPosition == 0 -> nameFirsCharTextViewID.text = model.name[0].toString()
-//                Contacts[adapterPosition - 1].name[0] == model.name[0] -> nameFirsCharTextViewID.text = ""
-//                else -> nameFirsCharTextViewID.text = model.name[0].toString()
-//
-//            }
-////////////////////რანდომ ფერის აღება/////////////////////////////////////
-//            val randomColor = (Math.random() * 16777215).toInt() or (0xFF shl 24)
-//
-//            val myIcon: Drawable? = ContactsApplication.instance.getContext().getDrawable(R.drawable.circle)
-//            /////////ფერის შეცვლა////////
-//            val filter: ColorFilter = LightingColorFilter(randomColor, randomColor)
-//            myIcon?.colorFilter = filter
-//            //////////////შესაბამისი რანდომ ფერის მქონე რესურსის დასეტვა/////////
-//            profilePhotoTextViewID.background = myIcon
-//            profilePhotoTextViewID.text = model.name[0].toString()
-//
-//            itemView.findViewById<TextView>(R.id.TextViewID).text = model.name
-
         }
     }
 }

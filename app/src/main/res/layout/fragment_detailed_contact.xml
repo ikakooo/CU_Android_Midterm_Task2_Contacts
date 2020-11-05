@@ -47,46 +47,50 @@
             app:layout_constraintTop_toBottomOf="@+id/contactNameTextViewID" />
 
         <ImageView
-            android:clickable="false"
             android:id="@+id/PhoneImageViewID"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/ic_phone"
+            android:clickable="false"
+            android:contentDescription="@string/todo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
         <ImageView
-            android:clickable="false"
             android:id="@+id/MessageImageViewID"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/ic_message"
+            android:clickable="false"
+            android:contentDescription="@string/todo"
             app:layout_constraintStart_toEndOf="@+id/PhoneImageViewID"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
         <ImageView
-            android:clickable="false"
             android:id="@+id/videoImageViewID"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/ic_video"
+            android:clickable="false"
+            android:contentDescription="@string/todo"
             app:layout_constraintStart_toEndOf="@+id/MessageImageViewID"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
         <ImageView
-            android:clickable="false"
             android:id="@+id/EmailImageViewID"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/ic_email"
+            android:clickable="false"
+            android:contentDescription="@string/todo"
             app:layout_constraintStart_toEndOf="@+id/videoImageViewID"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 

@@ -15,8 +15,8 @@
             app:destination="@id/contactDetailedFragmentID" />
     </fragment>
     <fragment
-        tools:layout="@layout/fragment_detailed_contact"
         android:id="@+id/contactDetailedFragmentID"
         android:name="com.cst.contacts.details.ContactDetailedFragment"
-        android:label="ContactDetailedFragment" />
+        android:label="ContactDetailedFragment"
+        tools:layout="@layout/fragment_detailed_contact" />
 </navigation>

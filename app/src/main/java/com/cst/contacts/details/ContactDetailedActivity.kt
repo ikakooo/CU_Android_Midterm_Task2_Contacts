@@ -5,5 +5,5 @@ package com.cst.contacts.details
  * რომელიც თავის მხრივ გადააწვდის ამ ID-ს ფრაგმენტს
  */
 class ContactDetailedActivity {
-
+//არვიცი ეს კლასი თქვენს უკითხავად ვერ წავშალე
 }

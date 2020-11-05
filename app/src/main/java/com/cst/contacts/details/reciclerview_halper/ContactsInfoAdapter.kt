@@ -7,7 +7,9 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.cst.contacts.R
 import com.cst.contacts.databinding.ContactsLayoutBinding
@@ -19,7 +21,7 @@ import com.cst.contacts.donottouch.PhoneNumber
 
 
 class ContactsInfoAdapter(
-    private val phoneNumbersInfoList:MutableList<PhoneNumber>,
+    private val phoneNumbersInfoList: MutableList<PhoneNumber>,
     private val emailsInfoList: MutableList<Email>
 ) :
     RecyclerView.Adapter<ContactsInfoAdapter.ViewHolder>() {
@@ -49,16 +51,30 @@ class ContactsInfoAdapter(
 
         @SuppressLint("UseCompatLoadingForDrawables")
         fun onBind() {
-            if (adapterPosition < phoneNumbersInfoList.size){
+            if (adapterPosition < phoneNumbersInfoList.size) {
                 phoneModel = phoneNumbersInfoList[adapterPosition]
-                itemView.findViewById<TextView>(R.id.InfoTextViewID).text =phoneModel.number
-                itemView.findViewById<TextView>(R.id.typeTextViewID).text = phoneModel.type.toString()
+                itemView.findViewById<TextView>(R.id.InfoTextViewID).text = phoneModel.number
+                itemView.findViewById<TextView>(R.id.typeTextViewID).text =
+                    phoneModel.type.toString()
 
+                itemView.findViewById<ImageView>(R.id.leftImageViewID).background =
+                    ContactsApplication.instance.getContext().getDrawable(R.drawable.ic_message)
 
-            }else{
-                emailModel = emailsInfoList[adapterPosition-phoneNumbersInfoList.size]
-                itemView.findViewById<TextView>(R.id.InfoTextViewID).text =emailModel.address
-                itemView.findViewById<TextView>(R.id.typeTextViewID).text = emailModel.type.toString()
+                when (adapterPosition) {
+                    0 -> itemView.findViewById<ImageView>(R.id.RightImageViewID).background =
+                        ContactsApplication.instance.getContext().getDrawable(R.drawable.ic_phone)
+                }
+            } else {
+                emailModel = emailsInfoList[adapterPosition - phoneNumbersInfoList.size]
+                itemView.findViewById<TextView>(R.id.InfoTextViewID).text = emailModel.address
+                itemView.findViewById<TextView>(R.id.typeTextViewID).text =
+                    emailModel.type.toString()
+
+                if (adapterPosition == phoneNumbersInfoList.size) {
+                    itemView.findViewById<ImageView>(R.id.RightImageViewID).background =
+                        ContactsApplication.instance.getContext().getDrawable(R.drawable.ic_message)
+                    itemView.findViewById<ImageView>(R.id.linearLayoutTopID).isVisible = true
+                }
             }
 
 

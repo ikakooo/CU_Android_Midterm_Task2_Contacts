@@ -5,16 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <LinearLayout
+        android:id="@+id/linearLayoutTopID"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="10dp"
+        android:background="#7C7C7C"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/InfoTextViewID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/RightImageViewID"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_margin="20dp"
-        android:src="@drawable/ic_phone"
+        android:layout_marginTop="660dp"
+        android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/todo" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutTopID" />
 
     <TextView
         android:id="@+id/InfoTextViewID"
@@ -26,7 +39,7 @@
         android:maxLines="1"
         android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/RightImageViewID"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutTopID"
         tools:text="i_chkhitunidze@cu.edu.gekjhsfdfkjhsdfjsdhfkjsfhj" />
 
     <TextView
@@ -40,12 +53,25 @@
 
     <ImageView
         android:id="@+id/leftImageViewID"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_margin="20dp"
-        android:src="@drawable/ic_phone"
+        android:layout_marginTop="656dp"
+        android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/todo" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutTopID" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutBottomID"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="6dp"
+        android:background="#7C7C7C"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/typeTextViewID" />
 </androidx.constraintlayout.widget.ConstraintLayout>

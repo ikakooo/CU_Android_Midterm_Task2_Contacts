@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,15 +13,16 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cst.contacts.R
+import com.cst.contacts.contacts.reciclerview_halper.ContactsAdapter
+import com.cst.contacts.contacts.reciclerview_halper.ItemClickListener
 import com.cst.contacts.databinding.FragmentContactsBinding
 import com.cst.contacts.donottouch.ContactInfo
 import com.cst.contacts.donottouch.mapToContactInfo
-import com.cst.contacts.contacts.reciclerview_halper.ContactsAdapter
-import com.cst.contacts.contacts.reciclerview_halper.ItemClickListener
 import com.github.tamir7.contacts.Contacts
+import java.util.*
 
 class ContactsFragment : Fragment() {
-    private lateinit var binding:FragmentContactsBinding
+    private lateinit var binding: FragmentContactsBinding
 
     private var contactsList = mutableListOf<ContactInfo>()
     private lateinit var contactsAdapter: ContactsAdapter
@@ -44,7 +44,6 @@ class ContactsFragment : Fragment() {
 
     private fun displayContacts(contacts: List<ContactInfo>) {
         /** ==== თქვენი კოდი ==== **/
-    d("sdfdsfdsf",contacts.toString())
         contactsList.clear()
         binding.contactsRecyclerViewID.apply {
             contactsAdapter = ContactsAdapter(contactsList,
@@ -53,21 +52,20 @@ class ContactsFragment : Fragment() {
                         val contactID = contactsList[position].id
 
                         val bundle = Bundle()
-                        bundle.putLong("Contact_ID",contactID)
-                        bundle.putInt("Contact_Color",randomColor)
-                        view?.findNavController()?.navigate(R.id.contactDetailedFragmentID,bundle)
+                        bundle.putLong("Contact_ID", contactID)
+                        bundle.putInt("Contact_Color", randomColor)
+                        view?.findNavController()?.navigate(R.id.contactDetailedFragmentID, bundle)
                     }
                 })
             layoutManager = LinearLayoutManager(context)
             adapter = contactsAdapter
 
         }
+        /////////// პირველადი სრული საკონტაქტო მონაცემების ჩატვირთვა ///////////////////////////
         contactsList.addAll(contacts)
-
-        d("contactsList",contactsList.toString())
         contactsAdapter.notifyDataSetChanged()
 
-
+////////////// კონტაქტის ძებნისთვის ტექსტვოჩერი /////////////////////////
         binding.SearchEditTextID.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
             }
@@ -76,10 +74,20 @@ class ContactsFragment : Fragment() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                d("sfsdfsdfsd",p0.toString())
+                contactsList.clear()
+                contactsList.addAll(contacts.filter(p0.toString()))
+                contactsAdapter.notifyDataSetChanged()
             }
 
         })
+    }
+    //////////  ფილტრი სერჩისთვის  /////////////////////////
+    fun List<ContactInfo>.filter(nameChars: String): List<ContactInfo> {
+        val list = mutableListOf<ContactInfo>()
+        forEach {
+            if (it.name.toLowerCase(Locale.ROOT).contains(nameChars.toLowerCase(Locale.ROOT))) list.add(it)
+        }
+        return list
     }
 
     /** ======== ამის ქვევით კოდს არ შეეხოთ ============= **/

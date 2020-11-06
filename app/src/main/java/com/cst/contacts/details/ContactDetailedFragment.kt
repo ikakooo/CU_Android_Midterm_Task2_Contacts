@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cst.contacts.Extensions.changeColorDrawable
 import com.cst.contacts.R
@@ -22,7 +20,7 @@ import com.github.tamir7.contacts.Contact
 import com.github.tamir7.contacts.Contacts
 
 
-class ContactDetailedFragment : Fragment() {
+class ContactDetailedFragment : Fragment(){
 
     private lateinit var binding: FragmentDetailedContactBinding
 
@@ -45,8 +43,11 @@ class ContactDetailedFragment : Fragment() {
 
         //////თულბარის გამართვა ///////////////
         binding.backIBID.setOnClickListener {
-                view.findNavController().navigate(R.id.contactsFragment)
-            }
+            activity?.onBackPressed()
+        }
+
+
+
         binding.StarIBID.setOnClickListener {
             Toast.makeText(context, "Favorite", Toast.LENGTH_SHORT).show()
         }

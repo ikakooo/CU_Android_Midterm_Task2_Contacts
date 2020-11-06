@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -45,39 +46,51 @@ class ContactsInfoAdapter(
 
 
         fun onBind() {
-            /////// ადაპტერში ვიუ ბაინდინგი როგორ მუშაობს გასარჩევი მაქვს /////////////
+            /////// ადაპტერში ვიუ ბაინდინგი სწორად როგორ მუშაობს გასარჩევი მაქვს /////////////
             if (adapterPosition < phoneNumbersInfoList.size) {
                 phoneModel = phoneNumbersInfoList[adapterPosition]
                 itemView.findViewById<TextView>(R.id.InfoTextViewID).text = phoneModel.number
                 itemView.findViewById<TextView>(R.id.typeTextViewID).text =
                     phoneModel.type.toString()
 
-                itemView.findViewById<ImageView>(R.id.leftImageViewID).background =
-                    ContextCompat.getDrawable(
+                itemView.findViewById<ImageView>(R.id.leftImageViewID).apply {
+                    setOnClickListener {
+                        Toast.makeText(context, "Message", Toast.LENGTH_SHORT).show()
+                    }
+                    background = ContextCompat.getDrawable(
                         ContactsApplication.instance.getContext(),
                         R.drawable.ic_message
                     )
+                }
 
 
                 when (adapterPosition) {
-                    0 -> itemView.findViewById<ImageView>(R.id.RightImageViewID).background =
-                        ContextCompat.getDrawable(
-                            ContactsApplication.instance.getContext(),
-                            R.drawable.ic_phone
-                        )
+                    0 -> itemView.findViewById<ImageView>(R.id.RightImageViewID).apply {
+                        setOnClickListener {
+                            Toast.makeText(context, "Call", Toast.LENGTH_SHORT).show()
+                        }
+                        background =
+                            ContextCompat.getDrawable(
+                                ContactsApplication.instance.getContext(),
+                                R.drawable.ic_phone
+                            )
+                    }
                 }
             } else {
                 emailModel = emailsInfoList[adapterPosition - phoneNumbersInfoList.size]
                 itemView.findViewById<TextView>(R.id.InfoTextViewID).text = emailModel.address
-                itemView.findViewById<TextView>(R.id.typeTextViewID).text =
-                    emailModel.type.toString()
+                itemView.findViewById<TextView>(R.id.typeTextViewID).text = emailModel.type.toString()
 
                 if (adapterPosition == phoneNumbersInfoList.size) {
-                    itemView.findViewById<ImageView>(R.id.RightImageViewID).background =
-                        ContextCompat.getDrawable(
+                    itemView.findViewById<ImageView>(R.id.RightImageViewID).apply {
+                        setOnClickListener {
+                            Toast.makeText(context, "Message", Toast.LENGTH_SHORT).show()
+                        }
+                        background = ContextCompat.getDrawable(
                             ContactsApplication.instance.getContext(),
-                            R.drawable.ic_message
+                            R.drawable.ic_email
                         )
+                    }
                     itemView.findViewById<ImageView>(R.id.linearLayoutTopID).isVisible = true
                 }
             }

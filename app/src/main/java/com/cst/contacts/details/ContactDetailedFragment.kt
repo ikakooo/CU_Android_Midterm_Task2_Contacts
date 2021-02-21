@@ -72,7 +72,7 @@ class ContactDetailedFragment : Fragment(){
 
 
         if (contactById != null) {
-            binding.profilePhotoTextViewID.text = contactById.name[0].toString()
+            binding.profilePhotoTextViewID.text = contactById.name?.get(0)?.toString()
             binding.contactNameTextViewID.text = contactById.name
 
 

@@ -49,17 +49,17 @@ class ContactsAdapter(
             val profilePhotoTextViewID =
                 itemView.findViewById<TextView>(R.id.profilePhotoTextViewID)
             when {
-                adapterPosition == 0 -> nameFirsCharTextViewID.text = model.name[0].toString()
-                Contacts[adapterPosition - 1].name[0] == model.name[0] -> nameFirsCharTextViewID.text =
+                adapterPosition == 0 -> nameFirsCharTextViewID.text = model.name?.get(0)?.toString()
+                Contacts[adapterPosition - 1].name?.get(0) == model.name?.get(0) -> nameFirsCharTextViewID.text =
                     ""
-                else -> nameFirsCharTextViewID.text = model.name[0].toString()
+                else -> nameFirsCharTextViewID.text = model.name?.get(0)?.toString()
 
             }
 //////////////////რანდომ ფერის აღება და რესაიქლერვიუს აითემებზე დასეტვა/////////////////////////////////////
             val randomColor = (Math.random() * 16777215).toInt() or (0xFF shl 24)
             profilePhotoTextViewID.changeColorDrawable(randomColor, R.drawable.circle)
 
-            profilePhotoTextViewID.text = model.name[0].toString()
+            profilePhotoTextViewID.text = model.name?.get(0)?.toString()
 
             itemView.findViewById<TextView>(R.id.TextViewID).text = model.name
 

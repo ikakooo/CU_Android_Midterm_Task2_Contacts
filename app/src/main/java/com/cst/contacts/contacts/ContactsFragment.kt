@@ -85,7 +85,7 @@ class ContactsFragment : Fragment() {
     fun List<ContactInfo>.filter(nameChars: String): List<ContactInfo> {
         val list = mutableListOf<ContactInfo>()
         forEach {
-            if (it.name.toLowerCase(Locale.ROOT).contains(nameChars.toLowerCase(Locale.ROOT))) list.add(it)
+            if (it.name?.toLowerCase(Locale.ROOT)?.contains(nameChars.toLowerCase(Locale.ROOT)) == true) list.add(it)
         }
         return list
     }
